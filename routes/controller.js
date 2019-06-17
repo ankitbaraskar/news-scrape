@@ -12,13 +12,13 @@ router.get("/", function (req, res) {
 });
 
 router.get("/scrape", function (req, res) {
-    
-    axios.get("http://www.echojs.com/").then(function (response) {        
+
+    axios.get("http://www.echojs.com/").then(function (response) {
         var $ = cheerio.load(response.data);
-        
-        $("article").each(function (i, element) {            
+
+        $("article").each(function (i, element) {
             var result = {};
-            
+
             result.title = $(this)
                 .children("h2")
                 .children("a")
@@ -26,27 +26,28 @@ router.get("/scrape", function (req, res) {
             result.summary = $(this)
                 .children("p")
                 .children("span.upvotes")
-                .text() 
+                .text()
                 + " up and " +
                 $(this)
-                .children("p")
-                .children("span.downvotes")
-                .text()
-                + "down, posted by "+
+                    .children("p")
+                    .children("span.downvotes")
+                    .text()
+                + " down, posted by " +
                 $(this)
-                .children("p")
-                .children("username")
-                .children("a")
-                .text()
+                    .children("p")
+                    .children("username")
+                    .children("a")
+                    .text()
                 + $(this)
-                .children("p")
-                .children("username")
-                .contents()
-                .filter(function() {
-                    return this.nodeType === 3;
-                  })
-                .text()
+                    .children("p")
+                    .contents()
+                    .filter(function () {
+                        return this.nodeType === 3;
+                    })
+                    .last()
+            // .text()
             result.link = $(this)
+                .children("h2")
                 .children("a")
                 .attr("href");
 
