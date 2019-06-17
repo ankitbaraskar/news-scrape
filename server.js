@@ -1,10 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const axios = require("axios");
-const cheerio = require("cheerio");
-
-var db = require("./models");
+// const routes = require("./routes/controller");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -20,6 +17,8 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use("/",require("./routes/controller"));
+// app.use(app.router);
+// routes.initialize(app);
 
 mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
 
@@ -28,4 +27,4 @@ app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
   });
 
-  module.exports = app;
+module.exports = app;
