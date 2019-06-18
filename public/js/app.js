@@ -7,6 +7,7 @@ $(document).ready(function () {
             .then(function (data) {
                 // $("#article-div").append(`<p>${data.title}</p>`)
                 // console.log(data);
+                $("#article-id").empty();
                 for (var i = 0; i < data.length; i++) {
                     
                     $("#article-id")
