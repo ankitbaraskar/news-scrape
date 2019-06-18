@@ -20,7 +20,8 @@ app.use("/",require("./routes/controller"));
 // app.use(app.router);
 // routes.initialize(app);
 
-mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScraper";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Start the server
 app.listen(PORT, function() {
